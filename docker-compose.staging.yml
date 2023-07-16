@@ -55,7 +55,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - acme:/etc/acme.sh
     depends_on:
-      - nginx-proxy
+      - nginx
 
 volumes:
   postgres_data:
