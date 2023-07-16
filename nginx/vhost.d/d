@@ -1,0 +1,9 @@
+location /static/ {
+  alias /home/static/;
+  add_header Access-Control-Allow-Origin *;
+}
+
+location /media/ {
+  alias /home/media/;
+  add_header Access-Control-Allow-Origin *;
+}
