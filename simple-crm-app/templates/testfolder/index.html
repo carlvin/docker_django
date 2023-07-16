@@ -1,0 +1,54 @@
+{% extends "base_template" %}
+{% block title %}
+Simple CRM | Home Page
+{% endblock title %}
+
+{% block breadcrumbs %}
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+    <li class="">Dashboard</li>
+</ol>
+{% endblock breadcrumbs %}
+
+{% block canvas %}
+<section class="w-75 mx-auto">
+    <div class="row">
+        <div class="col">
+            <h2>Home Page</h2>
+        </div>
+        <div class="col-6">
+            <input id="search" class="form-control" type="search" name="q"
+                placeholder="Begin Typing To Search Clients..." hx-get="{% url 'crm:search' %}"
+                hx-trigger="keyup changed delay:500ms, search" hx-target="#htmxCanvas" hx-push-url="true"
+                hx-preserve="#search" />
+        </div>
+        <div class="col text-center">
+            <a class="btn btn-success" hx-get="{% url 'crm:create-client' %}" hx-target="#htmxCanvas" hx-push-url="true"
+                role="button">
+                Add Client
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        {% if object_list %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in object_list %}
+                <tr class="hover" hx-get="{{ client.get_absolute_url }}" hx-target="#htmxCanvas" hx-push-url="true">
+                    <th scope="row">{{client.id }}</th>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %} There are no clients. {% endif %}
+    </div>
+</section>
+{% endblock canvas %}

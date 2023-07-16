@@ -1,0 +1,17 @@
+[Unit]
+Description=carlhub gunicorn daemon
+
+
+[Service]
+Type=simple
+PIDFile=/home/xorb/simple-crm-app/gunicorn.pid
+User=xorb
+Group=xorb
+EnvironmentFile=/etc/carlhub/gunicorn.env
+WorkingDirectory=/home/xorb/simple-crm-app/
+ExecStart=/home/xorb/simple-crm-app/venv/bin/gunicorn --config /etc/carlhub/gunicorn.conf.py config.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

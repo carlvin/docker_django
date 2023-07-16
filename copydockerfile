@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1
+# Fetch official latest base image for python 
+FROM python:3-Alpine
+
+# Prevent python from writing pyc to docker container
+ENV PYTHONDONTWRITEBYTECODE=1
+# Flush out python buffer
+ENV PYTHONUNBUFFERED=1
+
+# Setting up the working directory
+WORKDIR /home/app/
+
+# Create a virtual environment
+RUN python -m venv /home/app/venv
+
+# Set the virtual environment
+ENV VIRTUAL_ENV=/home/app/venv
+ENV PATH=$VIRTUAL_ENV/bin:$PATH
+
+# Copy requirements.freeze file to the image
+COPY requirements.freeze ./
+
+RUN mkdir /etc/carlhub
+COPY gunicorn.conf.py /etc/carlhub/gunicorn.conf.py
+COPY gunicorn.env /etc/carlhub/gunicorn.env
+COPY carlhub.service /etc/systemd/system/gunicorn.service
+
+# Install Python packages in the virtual environment
+RUN . /home/app/venv/bin/activate && pip install -r requirements.freeze
+
+# Copy all the files to your app
+COPY . .

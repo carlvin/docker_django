@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Simple Crm {% endblock title %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- meta  -->
+    {% block meta %}
+
+    {% endblock meta %}
+    <!-- css  -->
+    {% block css %}
+    
+    {% endblock css %}
+    <!-- js  -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+    {% block js %}
+
+    {% endblock js %}
+    <!-- additional css style code  -->
+    <style>
+      body {
+          height: 100vh;
+          overflow-y: hidden;
+      }
+
+      .container {
+          height: calc(100vh - 180px); /* Adjust the value based on your footer height */
+          overflow-y: auto;
+      }
+  </style>
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="bg-primary-2 dark:bg-gray-900">
+    <!-- navigation -->
+    <div id="topnav">
+      {% block topnav %}
+        {% include "partials/topnav.html" %}
+      
+      {% endblock topnav %}
+    </div>
+    
+    <!-- Breadcrumbs  -->
+    
+<div id="breadcrumbs class="flex" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+      {% block breadcrumbs %}
+        
+      {% endblock breadcrumbs %}
+    </ol>
+</div>
+  
+    
+    <!-- messages  -->
+    <div id="messages"></div>
+    
+    <!-- HtmxCanvas -->
+    <main id="htmxCanvas" class="container mx-auto py-8">
+      {% block canvas %}
+    
+      {% endblock canvas %}
+    </main>
+
+    <!-- additional footer code  -->
+    <footer class="p-4 bg-white md:p-6 lg:p-8 dark:bg-gray-800">
+      {% include "partials/footer.html" %}
+  </footer>
+  </body>
+  
+  
+
+</html>

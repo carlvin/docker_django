@@ -1,0 +1,44 @@
+services:
+
+  nginx:
+    container_name: nginx
+    #build directory/folder location 
+    build: ./nginx
+    ports:
+      - "1337:80"
+    volumes:
+      - static_volume:/home/static
+      - media_volume:/home/media
+    depends_on:
+    #service name
+      - simple_crm
+    restart: on-failure
+
+  gunicorn:   
+    container_name: gunicorn
+    build: .
+    command: systemctl start carlhub.service    
+    
+
+  # Django application
+  simple_crm:
+    container_name: simple_crm_app
+    #directory location
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - static_volume:/home/static
+      - media_volume:/home/media
+
+    expose:
+      - 8000
+    restart: on-failure
+    # healthcheck:
+    #   test: [ "CMD", "curl", "-f", "http://localhost:8000" ]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+
+volumes:
+  static_volume:
+  media_volume:

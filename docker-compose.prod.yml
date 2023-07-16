@@ -1,0 +1,44 @@
+services:
+
+  web: 
+    container_name: cool_carl_prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    #command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    command: sh -c "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    expose:
+      - 8000
+    volumes:
+      - static_volume:/home/static
+      - media_volume:/home/media
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+    
+  db:
+    container_name: cool_carl_db_prod
+    image: postgres:15.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.prod
+
+  nginx:
+    container_name: cool_carl_nginx
+    #build directory/folder location 
+    build: ./nginx
+    ports:
+      - "1337:80"
+    volumes:
+      - static_volume:/home/static
+      - media_volume:/home/media
+    depends_on:
+      - web
+    restart: on-failure
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
