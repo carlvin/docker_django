@@ -44,8 +44,8 @@ services:
       - web
     restart: always
 
-  nginx-proxy-letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+  nginx-proxy-letsencrypt: 
+    image: nginxproxy/acme-companion:latest
     env_file:
       - ./.env.prod
     volumes:
