@@ -1,6 +1,6 @@
 from .base import *
   
-DEBUG = True
+DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = ['https://*.carlhub.com','https://*.127.0.0.1']
 
