@@ -23,7 +23,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./.env.staging
+      - ./.env.staging.db
 
   nginx-proxy:
     container_name: nginx-proxy
@@ -47,7 +47,7 @@ services:
   nginx-proxy-letsencrypt:
     image: nginxproxy/acme-companion:latest
     env_file:
-      - ./.env.staging
+      - ./.env.staging.proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs
