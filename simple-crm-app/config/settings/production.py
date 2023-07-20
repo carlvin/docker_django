@@ -6,7 +6,7 @@ CSRF_TRUSTED_ORIGINS = ['https://*.carlhub.com','https://*.127.0.0.1']
 
 INTERNAL_IPS = ['127.0.0.1',]
 
-ALLOWED_HOSTS = ['carlhub.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['carlhub.com','localhost','www.carlhub.com','127.0.0.1']
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 SITE_ID = 1

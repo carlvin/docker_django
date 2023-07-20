@@ -85,8 +85,6 @@ RUN chown -R app:app /home/static
 COPY simple-crm-app ${APP_HOME}
 RUN chown -R app:app ${APP_HOME}
 
-
-
 # Change to app user
 USER app
 
