@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
     # 'django_htmx_refresh.middleware.HtmxResponseMiddleware',
-    '../../middleware.py.HtmxResponseMiddleware',
+    'middleware.py.HtmxResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
