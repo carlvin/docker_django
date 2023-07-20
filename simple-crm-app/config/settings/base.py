@@ -231,6 +231,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = "media_root"
 STATIC_ROOT = "static_root"
 
+
 AUTH_USER_MODEL = 'client_relationship_manager.User'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
