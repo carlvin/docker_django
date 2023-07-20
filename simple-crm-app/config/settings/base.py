@@ -121,7 +121,7 @@ HANDLERS = {
     },
     "info_handler": {
         "class": "logging.handlers.RotatingFileHandler",
-        "filename": f"{BASE_DIR}/logs/blogthedata_info.log",
+        "filename": f"{BASE_DIR}/logs/data_info.log",
         "mode": "a",
         "encoding": "utf-8",
         "formatter": "verbose",
@@ -131,7 +131,7 @@ HANDLERS = {
     },
     "error_handler": {
         "class": "logging.handlers.RotatingFileHandler",
-        "filename": f"{BASE_DIR}/logs/blogthedata_error.log",
+        "filename": f"{BASE_DIR}/logs/data_error.log",
         "mode": "a",
         "formatter": "verbose",
         "level": "WARNING",
