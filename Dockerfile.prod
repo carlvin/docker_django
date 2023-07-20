@@ -75,7 +75,7 @@ ADD ./nginx /home/app/nginx
 COPY ./entrypoint.sh ${APP_HOME}
 RUN sed -i 's/\r$//g' ${APP_HOME}/entrypoint.sh
 RUN chmod +x ${APP_HOME}/entrypoint.sh
-RUN chown -R app:app ${APP_HOME}
+
 RUN chown -R app:app /home/media
 RUN chown -R app:app /home/static
 
@@ -83,6 +83,7 @@ RUN chown -R app:app /home/static
 
 # Copy all the files to your app
 COPY simple-crm-app ${APP_HOME}
+RUN chown -R app:app ${APP_HOME}
 
 
 
